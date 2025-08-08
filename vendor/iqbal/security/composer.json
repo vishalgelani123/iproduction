@@ -1,0 +1,27 @@
+{
+    "name": "iqbal/security",
+    "description": "Security Package",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Iqbal\\Security\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "mdiqbalhossan",
+            "email": "jmiqbal7265@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Iqbal\\Security\\SecurityServiceProvider"
+            ]
+        }
+    }
+}
