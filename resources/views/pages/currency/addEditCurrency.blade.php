@@ -19,6 +19,7 @@
                     'method' => isset($obj) && $obj ? 'PATCH' : 'POST',
                     'route' => ['currency.update', isset($obj->id) && $obj->id ? $obj->id : ''],
                 ]) !!}
+
                 @csrf
                 <div>
                     <div class="row">
