@@ -718,6 +718,19 @@
                                     href="{{ route('units.create') }}">@lang('index.add_unit')</a>
                             </li>
                         @endif
+                            <li class="menu_assign_class {{ request()->routeIs('production-floor.index') ? ' treeMenuActive' : '' }}" data-menu__cid="irp_10"><a
+                                        href="{{ route('production-floor.index') }}">List Floor</a>
+                            </li>
+                            <li class="menu_assign_class {{ request()->routeIs('production-floor.create') ? ' treeMenuActive' : '' }}" data-menu__cid="irp_10"><a
+                                        href="{{ route('production-floor.create') }}">Add Floor</a>
+                            </li>
+
+                            <li class="menu_assign_class {{ request()->routeIs('production-table.index') ? ' treeMenuActive' : '' }}" data-menu__cid="irp_10"><a
+                                        href="{{ route('production-table.index') }}">List Table</a>
+                            </li>
+                            <li class="menu_assign_class {{ request()->routeIs('production-table.create') ? ' treeMenuActive' : '' }}" data-menu__cid="irp_10"><a
+                                        href="{{ route('production-table.create') }}">Add Table</a>
+                            </li>
                         @if (routePermission('currency.index'))
                             <li class="menu_assign_class {{ request()->routeIs('currency.index') ? ' treeMenuActive' : '' }}" data-menu__cid="irp_10"><a
                                     href="{{ route('currency.index') }}">@lang('index.list_currency')</a>

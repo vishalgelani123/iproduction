@@ -18,6 +18,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\ProductionFloor;
+use App\ProductionTable;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -48,7 +50,8 @@ class UserController extends Controller
     {
         $roles = Role::orderBy('title')->get();
         $title = __('index.add_user');
-        return view('pages.user.addEdit', compact('roles', 'title'));
+        $floors = ProductionFloor::all();
+        return view('pages.user.addEdit', compact('roles', 'title','floors'));
     }
 
     /**
@@ -68,6 +71,19 @@ class UserController extends Controller
                 'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
                 'status' => 'required',
                 'password' => 'required|min:6',
+                'floor_id' => 'nullable|exists:production_floors,id',
+                'table_id' => [
+                    'nullable',
+                    'exists:production_tables,id',
+                    function ($attribute, $value, $fail) {
+                        if ($value) {
+                            $table = ProductionTable::find($value);
+                            if ($table->users()->count() >= $table->number_of_seats) {
+                                $fail('The selected table is full.');
+                            }
+                        }
+                    },
+                ],
             ],
             [
                 'role.required' => __('index.role_required'),
@@ -100,6 +116,8 @@ class UserController extends Controller
         $row->is_first_login = 1;
         $row->del_status = 'Live';
         $row->company_id = 1;
+        $row->floor_id = $request->floor_id;
+        $row->table_id = $request->table_id;
         $row->save();
 
         return redirect()->route('user.index')->with(saveMessage());
@@ -128,7 +146,9 @@ class UserController extends Controller
         $obj = User::find(encrypt_decrypt($id, 'decrypt'));
         $roles = Role::orderBy('title')->get();
         $title = __('index.edit_user');
-        return view('pages.user.addEdit', compact('obj','title','roles'));
+        $floors = ProductionFloor::all();
+        $tables = ProductionTable::where('floor_id', $obj->floor_id)->get();
+        return view('pages.user.addEdit', compact('obj','title','roles','floors','tables'));
     }
 
     /**
@@ -140,6 +160,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $this->validate($request,
             [
                 'role' => 'required',
@@ -149,6 +171,22 @@ class UserController extends Controller
                 'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
                 'status' => 'required',
                 'password' => 'min:6',
+                'floor_id' => 'nullable|exists:production_floors,id',
+                'table_id' => [
+                    'nullable',
+                    'exists:production_tables,id',
+                    function ($attribute, $value, $fail) use ($user, $request) {
+
+                        if ($value === null || $value == $user->table_id) {
+                            return;
+                        }
+
+                        $table = ProductionTable::find($value);
+                        if ($table->users()->count() >= $table->number_of_seats) {
+                            $fail('The selected table is full.');
+                        }
+                    },
+                ],
             ],
             [
                 'role.required' => __('index.role_required'),
@@ -165,26 +203,30 @@ class UserController extends Controller
             ]
         );
 
-        $row = User::find($id);
-        $row->company_id = auth()->user()->company_id;
-        $row->role = 2;
-        $row->type = 'User';
-        $row->designation = $request->designation;
-        $row->name = $request->name;
-        $row->phone_number = $request->phone_number;
-        $row->email = $request->email;
-        $row->status = $request->status;
-        $row->permission_role = $request->role;
-        $row->salary = null_check($request->salary);
-        $row->is_first_login = 1;
-        $row->company_id = 1;
-        $row->save();
+        $user->company_id = auth()->user()->company_id;
+        $user->role = 2;
+        $user->type = 'User';
+        $user->designation = $request->designation;
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        $user->permission_role = $request->role;
+        $user->salary = null_check($request->salary);
+        $user->is_first_login = 1;
+        $user->company_id = 1;
+        $user->floor_id = $request->floor_id;
 
-        if($request->password != null){
-            
-            $row->password = Hash::make($request->password);
+        // Only update table_id if it's different
+        if ($user->table_id != $request->table_id) {
+            $user->table_id = $request->table_id;
         }
-        $row->save();
+
+        if ($request->password != null) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
 
         return redirect()->route('user.index')->with(updateMessage());
     }
@@ -202,5 +244,34 @@ class UserController extends Controller
         $obj->email = $obj->email.'-deleted';
         $obj->save();
         return redirect()->route('user.index')->with(deleteMessage());
+    }
+
+    public function tablesByFloor(Request $request)
+    {
+
+        $request->validate([
+            'floor_id' => 'required|integer|exists:production_floors,id'
+        ]);
+
+        $tables = ProductionTable::where('floor_id', $request->floor_id)
+            ->withCount('users')
+            ->get()
+            ->map(function ($table) {
+                return [
+                    'id' => $table->id,
+                    'full_name' => $table->table_name . ' (' .
+                        ($table->users_count >= $table->number_of_seats ?
+                            'Full' :
+                            $table->users_count . ' of ' . $table->number_of_seats . ' Available') . ')',
+                    'is_available' => $table->users_count < $table->number_of_seats
+                ];
+            });
+
+
+        return response()->json([
+            'success' => true,
+            'data' => $tables,
+            'message' => 'Tables retrieved successfully'
+        ]);
     }
 }
