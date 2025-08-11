@@ -35,18 +35,18 @@
                             <div class="form-group">
                                 <label for="">@lang('index.roles') {!! starSign() !!}</label>
                                 <select name="role" id="role"
-                                    class="form-control @error('role') is-invalid @enderror select2">
+                                        class="form-control @error('role') is-invalid @enderror select2">
                                     <option value="">@lang('index.select')</option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}"
-                                            {{ (isset($obj) && $obj->permission_role == $role->id) == $role->id || old('role') == $role->id ? 'selected' : '' }}>
+                                                {{ (isset($obj) && $obj->permission_role == $role->id) == $role->id || old('role') == $role->id ? 'selected' : '' }}>
                                             {{ $role->title ?? '' }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             @error('role')
-                                <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="row">
@@ -54,11 +54,12 @@
                                 <div class="form-group">
                                     <label>@lang('index.name') {!! starSign() !!}</label>
                                     <input type="text" name="name"
-                                        class="form-control @error('name') is-invalid @enderror name"
-                                        placeholder="{{ __('index.name') }}" value="{{ isset($obj) && $obj->name ? $obj->name : old('name') }}">
+                                           class="form-control @error('name') is-invalid @enderror name"
+                                           placeholder="{{ __('index.name') }}"
+                                           value="{{ isset($obj) && $obj->name ? $obj->name : old('name') }}">
                                 </div>
                                 @error('name')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -66,11 +67,12 @@
                                 <div class="form-group">
                                     <label>@lang('index.designation') {!! starSign() !!}</label>
                                     <input type="text" name="designation"
-                                        class="form-control @error('designation') is-invalid @enderror designation"
-                                        placeholder="{{ __('index.designation') }}" value="{{ isset($obj) && $obj->designation ? $obj->designation : old('designation') }}">
+                                           class="form-control @error('designation') is-invalid @enderror designation"
+                                           placeholder="{{ __('index.designation') }}"
+                                           value="{{ isset($obj) && $obj->designation ? $obj->designation : old('designation') }}">
                                 </div>
                                 @error('designation')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -78,11 +80,12 @@
                                 <div class="form-group">
                                     <label>@lang('index.email') {!! starSign() !!}</label>
                                     <input type="text" name="email"
-                                        class="form-control @error('email') is-invalid @enderror"
-                                        placeholder="{{ __('index.email') }}" value="{{ isset($obj) && $obj->email ? $obj->email : old('email') }}">
+                                           class="form-control @error('email') is-invalid @enderror"
+                                           placeholder="{{ __('index.email') }}"
+                                           value="{{ isset($obj) && $obj->email ? $obj->email : old('email') }}">
                                 </div>
                                 @error('email')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -90,11 +93,12 @@
                                 <div class="form-group">
                                     <label>@lang('index.phone_number') {!! starSign() !!}</label>
                                     <input type="text" name="phone_number"
-                                        class="form-control @error('phone_number') is-invalid @enderror"
-                                        placeholder="{{ __('index.phone_number') }}" value="{{ isset($obj) && $obj->phone_number ? $obj->phone_number : old('phone_number') }}">
+                                           class="form-control @error('phone_number') is-invalid @enderror"
+                                           placeholder="{{ __('index.phone_number') }}"
+                                           value="{{ isset($obj) && $obj->phone_number ? $obj->phone_number : old('phone_number') }}">
                                 </div>
                                 @error('phone_number')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-2">
@@ -109,10 +113,10 @@
                                         @endif
                                     </label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        name="password" id="password" autocomplete="off"
-                                        placeholder="{{ __('index.password') }}" maxlength="10">
+                                           name="password" id="password" autocomplete="off"
+                                           placeholder="{{ __('index.password') }}" maxlength="10">
                                     @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -122,9 +126,9 @@
                                         @lang('index.salary')
                                     </label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                        name="salary" id="salary" autocomplete="off"
-                                        value="{{ isset($obj->salary) ? $obj->salary : old('salary') }}"
-                                        placeholder="{{ __('index.salary') }}" maxlength="10">
+                                           name="salary" id="salary" autocomplete="off"
+                                           value="{{ isset($obj->salary) ? $obj->salary : old('salary') }}"
+                                           placeholder="{{ __('index.salary') }}" maxlength="10">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-2">
@@ -132,22 +136,64 @@
                                     <label>@lang('index.status') {!! starSign() !!}</label>
 
                                     <select name="status" id="status"
-                                        class="form-control @error('status') is-invalid @enderror select2">
+                                            class="form-control @error('status') is-invalid @enderror select2">
                                         <option value="Active" {{ isset($obj->status) && $obj->status == 'Active' ? 'selected' : null }}>{{ __('index.active') }}</option>
                                         <option value="Inactive" {{ isset($obj->status) && $obj->status == 'Inactive' ? 'selected' : null }}>{{ __('index.in_active') }}</option>
                                     </select>
                                 </div>
                                 @error('status')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-2">
+                                <div class="form-group">
+                                    <label>Floor</label>
+
+                                    <select name="floor_id" id="floor_id"
+                                            class="form-control @error('floor_id') is-invalid @enderror select2">
+                                        <option value="" selected hidden>Select Floor</option>
+                                        @foreach($floors as $floor)
+                                            <option value="{{$floor->id}}" {{ old('floor_id', $obj->floor_id ?? '') == $floor->id ? 'selected' : '' }}>{{$floor->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('floor_id')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-2">
+                                <div class="form-group">
+                                    <label>Table</label>
+
+                                    <select name="table_id" id="table_id"
+                                            class="form-control @error('table_id') is-invalid @enderror select2">
+                                        <option value=""></option>
+                                        @if(isset($tables) && $tables->count())
+                                            @foreach($tables as $table)
+                                                <option value="{{ $table->id }}"
+                                                        {{ old('table_id', $obj->table_id ?? '') == $table->id ? 'selected' : '' }}>
+                                                    {{ $table->full_name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                @error('table_id')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                         </div>
                         <div class="row mt-2">
                             <div class="col-sm-12 col-md-6 mb-2 d-flex gap-3">
-                                <button type="submit" name="submit" value="submit" class="btn bg-blue-btn"><iconify-icon
-                                        icon="solar:check-circle-broken"></iconify-icon>@lang('index.submit')</button>
-                                <a class="btn bg-second-btn" href="{{ route('user.index') }}"><iconify-icon
-                                        icon="solar:round-arrow-left-broken"></iconify-icon>@lang('index.back')</a>
+                                <button type="submit" name="submit" value="submit" class="btn bg-blue-btn">
+                                    <iconify-icon
+                                            icon="solar:check-circle-broken"></iconify-icon>@lang('index.submit')
+                                </button>
+                                <a class="btn bg-second-btn" href="{{ route('user.index') }}">
+                                    <iconify-icon
+                                            icon="solar:round-arrow-left-broken"></iconify-icon>@lang('index.back')</a>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -162,4 +208,67 @@
     $baseURL = getBaseURL();
     ?>
     <script type="text/javascript" src="{!! $baseURL . 'frequent_changing/js/role.js' !!}"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize select2
+
+
+            // Floor change handler
+            $('#floor_id').change(function() {
+                var floorId = $(this).val();
+                var tableSelect = $('#table_id');
+                var currentTableId = tableSelect.val();
+
+                tableSelect.empty().append('<option value=""></option>');
+
+                if (floorId) {
+                    // Clear previous options and add default empty option
+                    tableSelect.empty().append('<option value="">Select Table</option>');
+
+                    $.ajax({
+                        url: '{{ route("user.tables-by-floor") }}',
+                        type: 'post',
+                        data: { floor_id: floorId },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success && response.data.length > 0) {
+                                $.each(response.data, function(key, table) {
+                                    var option = new Option(table.full_name, table.id);
+                                    option.setAttribute('data-available', table.is_available);
+
+
+                                   /* if (!table.is_available && table.id != currentTableId) {
+                                        option.disabled = true;
+                                    }*/
+
+                                    //
+                                    if (table.id == currentTableId) {
+                                        option.selected = true;
+                                    }
+
+                                    tableSelect.append(option);
+                                });
+                            } else {
+                                tableSelect.append('<option value="" disabled>No tables available</option>');
+                                console.warn(response.message || 'No tables found for this floor');
+                            }
+                            tableSelect.trigger('change');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', error);
+                            tableSelect.empty()
+                                .append('<option value="" disabled>Error loading tables</option>');
+                        }
+                    });
+                } else {
+                    tableSelect.empty().append('<option value="">Select Floor first</option>');
+                }
+            });
+
+            // Trigger change on page load if floor is selected
+            if ($('#floor_id').val()) {
+                $('#floor_id').trigger('change');
+            }
+        });
+    </script>
 @endsection

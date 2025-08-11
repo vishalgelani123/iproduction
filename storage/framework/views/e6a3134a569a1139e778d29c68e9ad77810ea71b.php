@@ -718,6 +718,19 @@
                                     href="<?php echo e(route('units.create')); ?>"><?php echo app('translator')->get('index.add_unit'); ?></a>
                             </li>
                         <?php endif; ?>
+                            <li class="menu_assign_class <?php echo e(request()->routeIs('production-floor.index') ? ' treeMenuActive' : ''); ?>" data-menu__cid="irp_10"><a
+                                        href="<?php echo e(route('production-floor.index')); ?>">List Floor</a>
+                            </li>
+                            <li class="menu_assign_class <?php echo e(request()->routeIs('production-floor.create') ? ' treeMenuActive' : ''); ?>" data-menu__cid="irp_10"><a
+                                        href="<?php echo e(route('production-floor.create')); ?>">Add Floor</a>
+                            </li>
+
+                            <li class="menu_assign_class <?php echo e(request()->routeIs('production-table.index') ? ' treeMenuActive' : ''); ?>" data-menu__cid="irp_10"><a
+                                        href="<?php echo e(route('production-table.index')); ?>">List Table</a>
+                            </li>
+                            <li class="menu_assign_class <?php echo e(request()->routeIs('production-table.create') ? ' treeMenuActive' : ''); ?>" data-menu__cid="irp_10"><a
+                                        href="<?php echo e(route('production-table.create')); ?>">Add Table</a>
+                            </li>
                         <?php if(routePermission('currency.index')): ?>
                             <li class="menu_assign_class <?php echo e(request()->routeIs('currency.index') ? ' treeMenuActive' : ''); ?>" data-menu__cid="irp_10"><a
                                     href="<?php echo e(route('currency.index')); ?>"><?php echo app('translator')->get('index.list_currency'); ?></a>

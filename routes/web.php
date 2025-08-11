@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ForecastingController;
 use App\Http\Controllers\MailSettingController;
+use App\Http\Controllers\ProductionController;
+use App\Http\Controllers\ProductionFloorController;
+use App\Http\Controllers\ProductionTableController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +150,9 @@ Route::group(['middleware' => ['XSS']], function () {
         Route::resource('product-wastes', App\Http\Controllers\ProductWasteController::class);
 
         Route::resource('productions', App\Http\Controllers\ProductionController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'duplicate', 'duplicate_store', 'edit', 'show']);
+        Route::resource('production-floor', ProductionFloorController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
+        Route::resource('productionFloor', ProductionFloorController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
+        Route::resource('production-table', ProductionTableController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
 
         Route::get('/productions/{fproducts}/duplicate', [App\Http\Controllers\ProductionController::class, 'duplicate']);
         Route::get('/duplicate_store', [App\Http\Controllers\ProductionController::class, 'duplicate_store'])->name('duplicate_store');
@@ -253,6 +259,7 @@ Route::group(['middleware' => ['XSS']], function () {
 
         // User Controller
         Route::resource('user', UserController::class);
+        Route::post('/user/tables-by-floor', [UserController::class, 'tablesByFloor'])->name('user.tables-by-floor');
 
         // Mail Settings
         Route::get('/mail-settings', [MailSettingController::class, 'index'])->name('settings.mail.index');

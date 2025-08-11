@@ -206,6 +206,18 @@ $is_collapse = session('is_collapse') ?? 'No';
     <script src="<?php echo $baseURL . 'frequent_changing/newDesign/js/new-script.js?v=2'; ?>"></script>
     <script src="<?php echo $baseURL . 'frequent_changing/js/common_script.js?v=2'; ?>"></script>
     <script src="<?php echo $baseURL . 'frequent_changing/js/custom.js?v=2'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/datatable_custom/jquery-3.3.1.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/jquery.dataTables.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/dataTables.bootstrap4.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/dataTables.buttons.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/buttons.html5.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/buttons.print.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/jszip.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/pdfmake.min.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'assets/dataTable/vfs_fonts.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'frequent_changing/newDesign/js/forTable.js'; ?>"></script>
+    <script src="<?php echo $baseURL . 'frequent_changing/js/custom_report.js'; ?>"></script>
     <?php echo $__env->yieldContent('script'); ?>
 </body>
 
