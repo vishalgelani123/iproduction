@@ -28,9 +28,6 @@ class UpdateFloorRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'string',
-                'max:100',
-//                Rule::unique('production_floors')->ignore($this->route('productionFloor')),
             ],
             'description' => 'nullable|string',
         ];

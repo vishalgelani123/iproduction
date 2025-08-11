@@ -375,12 +375,12 @@ unset($__errorArgs, $__bag); ?>
                                     var option = new Option(table.full_name, table.id);
                                     option.setAttribute('data-available', table.is_available);
 
-                                    // Disable option if table is not available
+
                                    /* if (!table.is_available && table.id != currentTableId) {
                                         option.disabled = true;
                                     }*/
 
-                                    // Select the previously selected table
+                                    //
                                     if (table.id == currentTableId) {
                                         option.selected = true;
                                     }

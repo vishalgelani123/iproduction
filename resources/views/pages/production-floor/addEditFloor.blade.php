@@ -17,7 +17,7 @@
                 <!-- form start -->
                 {!! Form::model(isset($productionFloor) && $productionFloor ? $productionFloor : '', [
                     'method' => isset($productionFloor) && $productionFloor ? 'PATCH' : 'POST',
-                    'route' => ['production-table.update', isset($productionFloor->id) && $productionFloor->id ? $productionFloor->id : ''],
+                    'route' => ['production-floor.update', isset($productionFloor->id) && $productionFloor->id ? $productionFloor->id : ''],
                 ]) !!}
                 <form>
                     @csrf

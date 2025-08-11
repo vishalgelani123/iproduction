@@ -151,6 +151,7 @@ Route::group(['middleware' => ['XSS']], function () {
 
         Route::resource('productions', App\Http\Controllers\ProductionController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'duplicate', 'duplicate_store', 'edit', 'show']);
         Route::resource('production-floor', ProductionFloorController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
+        Route::resource('productionFloor', ProductionFloorController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
         Route::resource('production-table', ProductionTableController::class)->only(['index', 'create', 'store', 'destroy', 'update', 'edit', 'show']);
 
         Route::get('/productions/{fproducts}/duplicate', [App\Http\Controllers\ProductionController::class, 'duplicate']);
